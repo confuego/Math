@@ -1,0 +1,32 @@
+{
+  "name": "ray-tracer",
+  "version": "1.0.0",
+  "description": "Ray Tracing Engine",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+		"watch": "webpack --watch",
+		"serve": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/confuego/Ray-Tracer.git"
+  },
+  "author": "confuego",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/confuego/Ray-Tracer/issues"
+  },
+  "homepage": "https://github.com/confuego/Ray-Tracer#readme",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^10.5.4",
+    "ts-loader": "^4.4.2",
+    "tslint": "^5.11.0",
+    "tslint-eslint-rules": "^5.3.1",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
