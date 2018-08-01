@@ -2,10 +2,9 @@ const path = require('path');
 
 module.exports = {
 	entry: './src/index.ts',
-	mode: "production",
+	mode: "development",
 	devServer: {
-		contentBase: './',
-		hotOnly: true
+		contentBase: './'
 	},
   module: {
     rules: [

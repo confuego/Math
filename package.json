@@ -1,8 +1,8 @@
 {
-  "name": "ray-tracer",
+  "name": "math",
   "version": "1.0.0",
-  "description": "Ray Tracing Engine",
-  "main": "index.js",
+  "description": "Graphics Math Library",
+  "main": "index.ts",
   "scripts": {
     "start": "webpack",
 		"watch": "webpack --watch",
