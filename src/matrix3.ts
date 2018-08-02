@@ -109,6 +109,7 @@ export class Matrix3 {
 		destData[2] = data_0 * matData_2 + data_1 * matData_5 + data_2 * matData_8;
 		destData[5] = data_3 * matData_2 + data_4 * matData_5 + data_5 * matData_8;
 		destData[8] = data_6 * matData_2 + data_7 * matData_5 + data_8 * matData_8;
+
 		return dest;
 	}
 
