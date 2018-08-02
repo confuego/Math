@@ -1,18 +1,13 @@
 import { Vector3 } from "./vector3";
+import { Matrix } from "./matrix";
 
-export class Matrix3 {
-
-	private _data: Float64Array | Float32Array = new Float32Array(9)
+export class Matrix3 extends Matrix {
 
 	constructor(..._rows: Array<Float32Array | Float64Array>) {
-		if(Array.isArray(_rows)
-			&& _rows.length === 3
-			&& _rows.every(row => Array.isArray(row) && row.length === 3)) {
-				this._buildArray(_rows)
-		}
+		super(3, ..._rows);
 	}
 
-	private _buildArray(rows: Array<Float32Array | Float64Array>) {
+	protected buildArray(rows: Array<Float32Array | Float64Array>) {
 		const data = this._data;
 		data[0] = rows[0][0]
 		data[1] = rows[0][1]
@@ -111,24 +106,5 @@ export class Matrix3 {
 		destData[8] = data_6 * matData_2 + data_7 * matData_5 + data_8 * matData_8;
 
 		return dest;
-	}
-
-	public get(row: number, col: number): number {
-		return this._data[row * col + col]
-	}
-
-	public set(row: number, col: number, val: number): void {
-		this._data[row * col + col] = val;
-	}
-
-	public toString(): string {
-		let display = '';
-
-		for(let i = 0; i < this._data.length; i++) {
-			display += (i % 3 === 0) ? '\n' : ',';
-			display += this._data[i].toString()
-		}
-
-		return display;
 	}
 }

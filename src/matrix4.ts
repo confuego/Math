@@ -1,15 +1,11 @@
-export class Matrix4 {
-	private _data: Float64Array | Float32Array = new Float32Array(16)
+import { Matrix } from "./matrix";
 
+export class Matrix4 extends Matrix {
 	constructor(..._rows: Array<Float32Array | Float64Array>) {
-		if(Array.isArray(_rows)
-			&& _rows.length === 4
-			&& _rows.every(row => Array.isArray(row) && row.length === 4)) {
-				this._buildArray(_rows)
-		}
+		super(4, ..._rows);
 	}
 
-	private _buildArray(rows: Array<Float32Array | Float64Array>) {
+	protected buildArray(rows: Array<Float32Array | Float64Array>) {
 		const data = this._data;
 		data[0] = rows[0][0]
 		data[1] = rows[0][1]
@@ -139,24 +135,5 @@ export class Matrix4 {
 		destData[15] = data_12 * matData_3 + data_13 * matData_7 + data_14 * matData_11 + data_15 * matData_15;
 
 		return dest;
-	}
-
-	public get(row: number, col: number): number {
-		return this._data[row * col + col]
-	}
-
-	public set(row: number, col: number, val: number): void {
-		this._data[row * col + col] = val;
-	}
-
-	public toString(): string {
-		let display = '';
-
-		for(let i = 0; i < this._data.length; i++) {
-			display += (i % 4 === 0) ? '\n' : ',';
-			display += this._data[i].toString()
-		}
-
-		return display;
 	}
 }
