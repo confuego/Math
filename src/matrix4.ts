@@ -1,4 +1,5 @@
 import { Matrix } from "./matrix";
+import { Vector4 } from "./vector4";
 
 export class Matrix4 extends Matrix {
 	constructor(..._rows: Array<Float32Array>) {
@@ -71,6 +72,23 @@ export class Matrix4 extends Matrix {
 		destData[13] = data[13] - matData[13];
 		destData[14] = data[14] - matData[14];
 		destData[15] = data[15] - matData[15];
+
+		return dest;
+	}
+
+	public mulVec(vec: Vector4, dest: Vector4 = new Vector4()): Vector4 {
+		const matData = this._data;
+		const vecData = vec._data;
+		const vecData_0 = vecData[0];
+		const vecData_1 = vecData[1];
+		const vecData_2 = vecData[2];
+		const vecData_3 = vecData[3];
+		const destData = dest._data;
+
+		destData[0] = vecData_0 * matData[0] + vecData_0 * matData[1] + vecData_0 * matData[2] + vecData_0 * matData[3];
+		destData[1] = vecData_1 * matData[4] + vecData_1 * matData[5] + vecData_1 * matData[6] + vecData_1 * matData[7];
+		destData[2] = vecData_2 * matData[8] + vecData_2 * matData[9] + vecData_2 * matData[10] + vecData_2 * matData[11];
+		destData[3] = vecData_3 * matData[12] + vecData_3 * matData[13] + vecData_3 * matData[14] + vecData_3 * matData[15];
 
 		return dest;
 	}
