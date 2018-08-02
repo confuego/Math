@@ -29,6 +29,64 @@ export class Matrix4 {
 		data[15] = rows[3][3]
 	}
 
+	public add(mat: Matrix4, dest: Matrix4 = new Matrix4()): Matrix4 {
+		const data = this._data;
+		const matData = mat._data;
+		const destData = dest._data;
+
+		destData[0] = data[0] + matData[0];
+		destData[1] = data[1] + matData[1];
+		destData[2] = data[2] + matData[2];
+		destData[3] = data[3] + matData[3];
+		destData[4] = data[4] + matData[4];
+		destData[5] = data[5] + matData[5];
+		destData[6] = data[6] + matData[6];
+		destData[7] = data[7] + matData[7];
+		destData[8] = data[8] + matData[8];
+		destData[9] = data[9] + matData[9];
+		destData[10] = data[10] + matData[10];
+		destData[11] = data[11] + matData[11];
+		destData[12] = data[12] + matData[12];
+		destData[13] = data[13] + matData[13];
+		destData[14] = data[14] + matData[14];
+		destData[15] = data[15] + matData[15];
+
+		return dest;
+	}
+
+	public sub(mat: Matrix4, dest: Matrix4 = new Matrix4()): Matrix4 {
+		const data = this._data;
+		const matData = mat._data;
+		const destData = dest._data;
+
+		destData[0] = data[0] - matData[0];
+		destData[1] = data[1] - matData[1];
+		destData[2] = data[2] - matData[2];
+		destData[3] = data[3] - matData[3];
+		destData[4] = data[4] - matData[4];
+		destData[5] = data[5] - matData[5];
+		destData[6] = data[6] - matData[6];
+		destData[7] = data[7] - matData[7];
+		destData[8] = data[8] - matData[8];
+		destData[9] = data[9] - matData[9];
+		destData[10] = data[10] - matData[10];
+		destData[11] = data[11] - matData[11];
+		destData[12] = data[12] - matData[12];
+		destData[13] = data[13] - matData[13];
+		destData[14] = data[14] - matData[14];
+		destData[15] = data[15] - matData[15];
+
+		return dest;
+	}
+
+	public get(row: number, col: number): number {
+		return this._data[row * col + col]
+	}
+
+	public set(row: number, col: number, val: number): void {
+		this._data[row * col + col] = val;
+	}
+
 	public toString(): string {
 		let display = '';
 
