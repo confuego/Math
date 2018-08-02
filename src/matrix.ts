@@ -1,15 +1,15 @@
 export abstract class Matrix {
-	protected _data: Float32Array | Float64Array;
+	public _data: Float32Array = new Float32Array(this.size * this.size);
 
-	constructor(public size: number, ..._rows: Array<Float32Array | Float64Array>) {
+	constructor(public size: number, ..._rows: Array<Float32Array>) {
 		if(Array.isArray(_rows)
 		&& _rows.length === size
 		&& _rows.every(row => Array.isArray(row) && row.length === size)) {
-			this.buildArray(_rows)
+			this.buildArray(_rows);
 		}
 	}
 
-	protected abstract buildArray(rows: Array<Float32Array | Float64Array>);
+	protected abstract buildArray(rows: Array<Float32Array>): void;
 
 	public get(row: number, col: number): number {
 		return this._data[row * col + col]

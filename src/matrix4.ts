@@ -1,11 +1,11 @@
 import { Matrix } from "./matrix";
 
 export class Matrix4 extends Matrix {
-	constructor(..._rows: Array<Float32Array | Float64Array>) {
+	constructor(..._rows: Array<Float32Array>) {
 		super(4, ..._rows);
 	}
 
-	protected buildArray(rows: Array<Float32Array | Float64Array>) {
+	protected buildArray(rows: Array<Float32Array>) {
 		const data = this._data;
 		data[0] = rows[0][0]
 		data[1] = rows[0][1]
