@@ -3,6 +3,8 @@ Math libraries for Games in JS
 
 ### Development To-Do's
 
+- [X] Determinant Matrix3
+- [ ] Determinant Matrix4
 - [ ] Inverse Matrix3
 - [ ] Identity Matrix3
 - [ ] Inverse Matrix4
@@ -15,3 +17,4 @@ Math libraries for Games in JS
 - [ ] Better Name for library
 - [ ] General Matrix Class
 - [ ] Examples in README and link to documentation with more detailed examples
+- [ ] Support function overloading

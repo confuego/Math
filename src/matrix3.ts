@@ -107,4 +107,18 @@ export class Matrix3 extends Matrix {
 
 		return dest;
 	}
+
+	public det(): number {
+		const data = this._data;
+		const data_3 = data[3];
+		const data_4 = data[4];
+		const data_5 = data[5];
+		const data_6 = data[6];
+		const data_7 = data[7];
+		const data_8 = data[8];
+
+		return (data[0] * (data_4 * data_8 - data_5 * data_7))
+						- (data[1] * (data_3 * data_8 - data_5 * data_6))
+						+ (data[2] * (data_3 * data_7 - data_4 * data_6));
+	}
 }
