@@ -13,15 +13,15 @@ export class Matrix3 extends Matrix {
 
 	protected buildArray(rows: Array<Float32Array>) {
 		const data = this._data;
-		data[0] = rows[0][0]
-		data[1] = rows[0][1]
-		data[2] = rows[0][2]
-		data[3] = rows[1][0]
-		data[4] = rows[1][1]
-		data[5] = rows[1][2]
-		data[6] = rows[2][0]
-		data[7] = rows[2][1]
-		data[8] = rows[2][2]
+		data[0] = rows[0][0];
+		data[1] = rows[0][1];
+		data[2] = rows[0][2];
+		data[3] = rows[1][0];
+		data[4] = rows[1][1];
+		data[5] = rows[1][2];
+		data[6] = rows[2][0];
+		data[7] = rows[2][1];
+		data[8] = rows[2][2];
 	}
 
 	public add(mat: Matrix3, dest: Matrix3 = new Matrix3()): Matrix3 {

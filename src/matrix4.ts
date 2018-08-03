@@ -8,22 +8,22 @@ export class Matrix4 extends Matrix {
 
 	protected buildArray(rows: Array<Float32Array>) {
 		const data = this._data;
-		data[0] = rows[0][0]
-		data[1] = rows[0][1]
-		data[2] = rows[0][2]
-		data[3] = rows[0][3]
-		data[4] = rows[1][0]
-		data[5] = rows[1][1]
-		data[6] = rows[1][2]
-		data[7] = rows[1][3]
-		data[8] = rows[2][0]
-		data[9] = rows[2][1]
-		data[10] = rows[2][2]
-		data[11] = rows[2][3]
-		data[12] = rows[3][0]
-		data[13] = rows[3][1]
-		data[14] = rows[3][2]
-		data[15] = rows[3][3]
+		data[0] = rows[0][0];
+		data[1] = rows[0][1];
+		data[2] = rows[0][2];
+		data[3] = rows[0][3];
+		data[4] = rows[1][0];
+		data[5] = rows[1][1];
+		data[6] = rows[1][2];
+		data[7] = rows[1][3];
+		data[8] = rows[2][0];
+		data[9] = rows[2][1];
+		data[10] = rows[2][2];
+		data[11] = rows[2][3];
+		data[12] = rows[3][0];
+		data[13] = rows[3][1];
+		data[14] = rows[3][2];
+		data[15] = rows[3][3];
 	}
 
 	public add(mat: Matrix4, dest: Matrix4 = new Matrix4()): Matrix4 {
@@ -153,5 +153,38 @@ export class Matrix4 extends Matrix {
 		destData[15] = data_12 * matData_3 + data_13 * matData_7 + data_14 * matData_11 + data_15 * matData_15;
 
 		return dest;
+	}
+
+	public det(): number {
+		const data = this._data;
+		const data_4 = data[4];
+		const data_5 = data[5];
+		const data_6 = data[6];
+		const data_7 = data[7];
+		const data_8 = data[8];
+		const data_9 = data[9];
+		const data_10 = data[10];
+		const data_11 = data[11];
+		const data_12 = data[12];
+		const data_13 = data[13];
+		const data_14 = data[14];
+		const data_15 = data[15];
+
+		const coFactor_1 = (data_5 * (data_10 * data_15 - data_11 * data_14))
+												- (data_6 * (data_9 * data_15 - data_11 * data_13))
+												+ (data_7 * (data_9 * data_14 - data_10 * data_13));
+		const coFactor_2 = (data_4 * (data_10 * data_15 - data_11 * data_14))
+												- (data_6 * (data_8 * data_15 - data_11 * data_12))
+												+ (data_7 * (data_8 * data_14 - data_9 * data_12));
+		const coFactor_3 = (data_4 * (data_9 * data_15 - data_11 * data_13))
+												- (data_5 * (data_8 * data_15 - data_11 * data_12))
+												+ (data_7 * (data_8 * data_13 - data_9 * data_12));
+		const coFactor_4 = (data_4 * (data_9 * data_14 - data_13 * data_10))
+												- (data_5 * (data_8 * data_14 - data_10 * data_12))
+												+ (data_6 * (data_8 * data_13 - data_9 * data_12));
+		return (data[0] * coFactor_1)
+				- (data[1] * coFactor_2)
+				+ (data[2] * coFactor_3)
+				- (data[3] * coFactor_4);
 	}
 }
