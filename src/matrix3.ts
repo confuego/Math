@@ -121,4 +121,27 @@ export class Matrix3 extends Matrix {
 						- (data[1] * (data_3 * data_8 - data_5 * data_6))
 						+ (data[2] * (data_3 * data_7 - data_4 * data_6));
 	}
+
+	public transpose(dest: Matrix3 = new Matrix3()): Matrix3 {
+		const data = this._data;
+		const destData = dest._data;
+
+		destData[0] = data[0];
+		destData[1] = data[1];
+
+		let temp = data[1];
+		destData[1] = data[3];
+		destData[3] = temp;
+
+		temp = data[2];
+		destData[2] = data[6];
+		destData[6] = temp;
+
+		temp = data[5];
+		destData[5] = data[7];
+		destData[7] = temp;
+
+		temp = null;
+		return dest;
+	}
 }
