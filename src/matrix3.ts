@@ -3,6 +3,10 @@ import { Matrix } from "./matrix";
 
 export class Matrix3 extends Matrix {
 
+	public static IDENTITY = new Matrix3(new Float32Array([1,0,0]),
+		new Float32Array([0,1,0]),
+		new Float32Array([0,0,1]));
+
 	constructor(..._rows: Array<Float32Array>) {
 		super(3, ..._rows);
 	}
@@ -142,6 +146,45 @@ export class Matrix3 extends Matrix {
 		destData[7] = temp;
 
 		temp = null;
+		return dest;
+	}
+
+	public adj(dest: Matrix3 = new Matrix3()): Matrix3 {
+		const destData = dest._data;
+		const data = this._data;
+
+		destData[0] = (data[4] * data[8]) - (data[5] * data[7]);
+		destData[1] = -((data[1] * data[8]) - (data[2] * data[7]));
+		destData[2] = (data[1] * data[5]) - (data[2] * data[4]);
+		destData[3] = -((data[3] * data[8]) - (data[5] * data[6]));
+		destData[4] = (data[0] * data[8]) - (data[2] * data[6]);
+		destData[5] = -((data[0] * data[5]) - (data[2] * data[3]));
+		destData[6] = (data[3] * data[7]) - (data[4] * data[6]);
+		destData[7] = -((data[0] * data[7]) - (data[1] * data[6]));
+		destData[8] = (data[0] * data[4]) -(data[1] * data[3]);
+
+		return dest;
+	}
+
+	public inv(dest: Matrix3 = new Matrix3()): Matrix3 {
+		let det = this.det();
+		if(det === 0)
+			return dest;
+
+		det = 1 / det;
+		const adj = this.adj(dest);
+		const adjData = adj._data;
+
+		adjData[0] *= det;
+		adjData[1] *= det;
+		adjData[2] *= det;
+		adjData[3] *= det;
+		adjData[4] *= det;
+		adjData[5] *= det;
+		adjData[6] *= det;
+		adjData[7] *= det;
+		adjData[8] *= det;
+
 		return dest;
 	}
 }

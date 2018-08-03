@@ -5,9 +5,9 @@ Math libraries for Games in JS
 
 - [X] Determinant Matrix3
 - [X] Transpose Matrix3
+- [X] Identity Matrix3
+- [X] Inverse Matrix3
 - [ ] Determinant Matrix4
-- [ ] Inverse Matrix3
-- [ ] Identity Matrix3
 - [ ] Inverse Matrix4
 - [ ] Identity Matrix4
 - [ ] Documentation Generator
