@@ -175,7 +175,7 @@ export class Matrix4 extends Matrix {
 												+ (data_7 * (data_9 * data_14 - data_10 * data_13));
 		const coFactor_2 = (data_4 * (data_10 * data_15 - data_11 * data_14))
 												- (data_6 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_7 * (data_8 * data_14 - data_9 * data_12));
+												+ (data_7 * (data_8 * data_14 - data_10 * data_12));
 		const coFactor_3 = (data_4 * (data_9 * data_15 - data_11 * data_13))
 												- (data_5 * (data_8 * data_15 - data_11 * data_12))
 												+ (data_7 * (data_8 * data_13 - data_9 * data_12));
