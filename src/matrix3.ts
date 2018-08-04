@@ -152,16 +152,25 @@ export class Matrix3 extends Matrix {
 	public adj(dest: Matrix3 = new Matrix3()): Matrix3 {
 		const destData = dest._data;
 		const data = this._data;
+		const data_0 = data[0];
+		const data_1 = data[1];
+		const data_2 = data[2];
+		const data_3 = data[3];
+		const data_4 = data[4];
+		const data_5 = data[5];
+		const data_6 = data[6];
+		const data_7 = data[7];
+		const data_8 = data[8];
 
-		destData[0] = (data[4] * data[8]) - (data[5] * data[7]);
-		destData[1] = -((data[1] * data[8]) - (data[2] * data[7]));
-		destData[2] = (data[1] * data[5]) - (data[2] * data[4]);
-		destData[3] = -((data[3] * data[8]) - (data[5] * data[6]));
-		destData[4] = (data[0] * data[8]) - (data[2] * data[6]);
-		destData[5] = -((data[0] * data[5]) - (data[2] * data[3]));
-		destData[6] = (data[3] * data[7]) - (data[4] * data[6]);
-		destData[7] = -((data[0] * data[7]) - (data[1] * data[6]));
-		destData[8] = (data[0] * data[4]) -(data[1] * data[3]);
+		destData[0] = (data_4 * data_8) - (data_5 * data_7);
+		destData[1] = -((data_1 * data_8) - (data_2 * data_7));
+		destData[2] = (data_1 * data_5) - (data_2 * data_4);
+		destData[3] = -((data_3 * data_8) - (data_5 * data_6));
+		destData[4] = (data_0 * data_8) - (data_2 * data_6);
+		destData[5] = -((data_0 * data_5) - (data_2 * data_3));
+		destData[6] = (data_3 * data_7) - (data_4 * data_6);
+		destData[7] = -((data_0 * data_7) - (data_1 * data_6));
+		destData[8] = (data_0 * data_4) -(data_1 * data_3);
 
 		return dest;
 	}
