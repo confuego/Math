@@ -1,7 +1,7 @@
 export abstract class Matrix {
 	public _data: Float32Array = new Float32Array(this.size * this.size);
 
-	constructor(public size: number, ..._rows: Array<Float32Array>) {
+	constructor(public size: number, ..._rows: Array<Array<number>>) {
 		if(Array.isArray(_rows)
 		&& _rows.length === size
 		&& _rows.every(row => Array.isArray(row) && row.length === size)) {
@@ -9,7 +9,7 @@ export abstract class Matrix {
 		}
 	}
 
-	protected abstract buildArray(rows: Array<Float32Array>): void;
+	protected abstract buildArray(rows: Array<Array<number>>): void;
 
 	public get(row: number, col: number): number {
 		return this._data[row * col + col]

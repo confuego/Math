@@ -2,11 +2,14 @@ import { Matrix } from "./matrix";
 import { Vector4 } from "./vector4";
 
 export class Matrix4 extends Matrix {
-	constructor(..._rows: Array<Float32Array>) {
+
+	static IDENTITY: Matrix4 = new Matrix4([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]);
+
+	constructor(..._rows: Array<Array<number>>) {
 		super(4, ..._rows);
 	}
 
-	protected buildArray(rows: Array<Float32Array>) {
+	protected buildArray(rows: Array<Array<number>>) {
 		const data = this._data;
 		data[0] = rows[0][0];
 		data[1] = rows[0][1];
@@ -186,5 +189,121 @@ export class Matrix4 extends Matrix {
 				- (data[1] * coFactor_2)
 				+ (data[2] * coFactor_3)
 				- (data[3] * coFactor_4);
+	}
+
+	public adj(dest: Matrix4 = new Matrix4()): Matrix4 {
+		const data = this._data;
+		const destData = dest._data;
+		const data_0 = data[0];
+		const data_1 = data[1];
+		const data_2 = data[2];
+		const data_3 = data[3];
+		const data_4 = data[4];
+		const data_5 = data[5];
+		const data_6 = data[6];
+		const data_7 = data[7];
+		const data_8 = data[8];
+		const data_9 = data[9];
+		const data_10 = data[10];
+		const data_11 = data[11];
+		const data_12 = data[12];
+		const data_13 = data[13];
+		const data_14 = data[14];
+		const data_15 = data[15];
+
+		destData[0] = (data_5 * (data_10 * data_15 - data_11 * data_14))
+												- (data_6 * (data_9 * data_15 - data_11 * data_13))
+												+ (data_7 * (data_9 * data_14 - data_10 * data_13));
+
+		destData[4] = -((data_4 * (data_10 * data_15 - data_11 * data_14))
+												- (data_6 * (data_8 * data_15 - data_11 * data_12))
+												+ (data_7 * (data_8 * data_14 - data_10 * data_12)));
+
+		destData[8] = (data_4 * (data_9 * data_15 - data_11 * data_13))
+												- (data_5 * (data_8 * data_15 - data_11 * data_12))
+												+ (data_7 * (data_8 * data_13 - data_9 * data_12));
+
+		destData[12] = -((data_4 * (data_9 * data_14 - data_13 * data_10))
+												- (data_5 * (data_8 * data_14 - data_10 * data_12))
+												+ (data_6 * (data_8 * data_13 - data_9 * data_12)));
+
+		destData[1] = -((data_1 * (data_10 * data_15 - data_11 * data_14))
+												- (data_2 * (data_9 * data_15 - data_11 * data_13))
+												+ (data_3 * (data_9 * data_14 - data_10 * data_13)));
+
+		destData[5] = (data_0 * (data_10 * data_15 - data_11 * data_14))
+												- (data_2 * (data_8 * data_15 - data_11 * data_12))
+												+ (data_3 * (data_8 * data_14 - data_10 * data_12));
+
+		destData[9] = -((data_0 * (data_9 * data_15 - data_11 * data_13))
+												- (data_1 * (data_8 * data_15 - data_11 * data_12))
+												+ (data_3 * (data_8 * data_13 - data_9 * data_12)));
+
+		destData[13] = (data_0 * (data_9 * data_14 - data_10 * data_13))
+												- (data_1 * (data_8 * data_14 - data_10 * data_12))
+												+ (data_2 * (data_8 * data_13 - data_9 * data_12));
+
+		destData[2] = (data_1 * (data_6 * data_15 - data_7 * data_14))
+													- (data_2 * (data_5 * data_15 - data_7 * data_13))
+													+ (data_3 * (data_5 * data_14 - data_6 * data_13));
+
+		destData[6] = -((data_0 * (data_6 * data_15 - data_7 * data_14))
+													- (data_2 * (data_4 * data_15 - data_7 * data_12))
+													+ (data_3 * (data_4 * data_14 - data_6 * data_12)));
+
+		destData[10] = (data_0 * (data_5 * data_15 - data_7 * data_13))
+														- (data_1 * (data_4 * data_15 - data_7 * data_12))
+														+ (data_3 * (data_4 * data_13 - data_5 * data_12));
+
+		destData[14] = -((data_0 * (data_5 * data_14 - data_6 * data_13))
+														- (data_1 * (data_4 * data_14 - data_6 * data_12))
+														+ (data_2 * (data_4 * data_13 - data_5 * data_12)));
+
+		destData[3] = -((data_1 * (data_6 * data_11 - data_7 * data_10))
+														- (data_2 * (data_5 * data_11 - data_7 * data_9))
+														+ (data_3 * (data_5 * data_10 - data_6 * data_9)));
+
+		destData[7] = (data_0 * (data_6 * data_11 - data_7 * data_10))
+														- (data_2 * (data_4 * data_11 - data_7 * data_8))
+														+ (data_3 * (data_4 * data_10 - data_6 * data_8));
+
+		destData[11] = -((data_0 * (data_5 * data_11 - data_7 * data_9))
+														- (data_1 * (data_4 * data_11 - data_7 * data_8))
+														+ (data_3 * (data_4 * data_9 - data_5 * data_8)));
+
+		destData[15] = (data_0 * (data_5 * data_10 - data_6 * data_9))
+														- (data_1 * (data_4 * data_10 - data_6 * data_8))
+														+ (data_2 * (data_4 * data_9 - data_5 * data_8));
+
+		return dest;
+	}
+
+	public inv(dest: Matrix4 = new Matrix4()): Matrix4 {
+		const det = this.det();
+		if(det === 0) {
+			throw new Error('Determinant is 0.');
+		}
+
+		const adj = this.adj(dest);
+		const adjData = adj._data;
+
+		adjData[0] /= det;
+		adjData[1] /= det;
+		adjData[2] /= det;
+		adjData[3] /= det;
+		adjData[4] /= det;
+		adjData[5] /= det;
+		adjData[6] /= det;
+		adjData[7] /= det;
+		adjData[8] /= det;
+		adjData[9] /= det;
+		adjData[10] /= det;
+		adjData[11] /= det;
+		adjData[12] /= det;
+		adjData[13] /= det;
+		adjData[14] /= det;
+		adjData[15] /= det;
+
+		return adj;
 	}
 }

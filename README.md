@@ -7,9 +7,9 @@ Math libraries for Games in JS
 - [X] Transpose Matrix3
 - [X] Identity Matrix3
 - [X] Inverse Matrix3
-- [ ] Determinant Matrix4
-- [ ] Inverse Matrix4
-- [ ] Identity Matrix4
+- [X] Determinant Matrix4
+- [X] Inverse Matrix4
+- [X] Identity Matrix4
 - [ ] Documentation Generator
 - [ ] Automated Tests
 - [ ] CircleCI

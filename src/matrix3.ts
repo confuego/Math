@@ -3,15 +3,13 @@ import { Matrix } from "./matrix";
 
 export class Matrix3 extends Matrix {
 
-	public static IDENTITY = new Matrix3(new Float32Array([1,0,0]),
-		new Float32Array([0,1,0]),
-		new Float32Array([0,0,1]));
+	public static IDENTITY = new Matrix3([1,0,0], [0,1,0], [0,0,1]);
 
-	constructor(..._rows: Array<Float32Array>) {
+	constructor(..._rows: Array<Array<number>>) {
 		super(3, ..._rows);
 	}
 
-	protected buildArray(rows: Array<Float32Array>) {
+	protected buildArray(rows: Array<Array<number>>) {
 		const data = this._data;
 		data[0] = rows[0][0];
 		data[1] = rows[0][1];
@@ -177,22 +175,22 @@ export class Matrix3 extends Matrix {
 
 	public inv(dest: Matrix3 = new Matrix3()): Matrix3 {
 		let det = this.det();
-		if(det === 0)
-			return dest;
+		if(det === 0) {
+			throw new Error('Determinant is 0.');
+		}
 
-		det = 1 / det;
 		const adj = this.adj(dest);
 		const adjData = adj._data;
 
-		adjData[0] *= det;
-		adjData[1] *= det;
-		adjData[2] *= det;
-		adjData[3] *= det;
-		adjData[4] *= det;
-		adjData[5] *= det;
-		adjData[6] *= det;
-		adjData[7] *= det;
-		adjData[8] *= det;
+		adjData[0] /= det;
+		adjData[1] /= det;
+		adjData[2] /= det;
+		adjData[3] /= det;
+		adjData[4] /= det;
+		adjData[5] /= det;
+		adjData[6] /= det;
+		adjData[7] /= det;
+		adjData[8] /= det;
 
 		return dest;
 	}
