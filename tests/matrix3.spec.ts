@@ -5,11 +5,13 @@ import 'mocha';
 describe('Matrix3', () => {
 	it('should create', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		expect(mat).to.not.be.null;
 	});
 
 	it('can get cells', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		expect(mat.get(0,0)).to.be.equal(1);
 		expect(mat.get(0,1)).to.be.equal(2);
 		expect(mat.get(0,2)).to.be.equal(3);
@@ -23,12 +25,15 @@ describe('Matrix3', () => {
 
 	it('can set cells', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		mat.set(2,2, 1000);
+
 		expect(mat.get(2,2)).to.be.equal(1000);
 	});
 
 	it('can add (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		mat.add(mat, mat);
 
 		expect(mat.get(0,0)).to.be.equal(2);
@@ -42,8 +47,9 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(18);
 	});
 
-	it('can add (copy)', () => {
+	it('can add (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		const newMat = mat.add(mat);
 
 		expect(newMat.get(0,0)).to.be.equal(2);
@@ -69,6 +75,7 @@ describe('Matrix3', () => {
 
 	it('can subtract (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		mat.sub(mat, mat);
 
 		expect(mat.get(0,0)).to.be.equal(0);
@@ -82,8 +89,9 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(0);
 	});
 
-	it('can subtract (copy)', () => {
+	it('can subtract (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
 		const newMat = mat.sub(mat);
 
 		expect(newMat.get(0,0)).to.be.equal(0);
@@ -107,9 +115,10 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can multiply a vector (copy)', () => {
+	it('can multiply a vector (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const vec = new Vector3([1,2,3]);
+
 		const res = mat.mulVec(vec);
 
 		expect(res.get(0)).to.be.equal(14);
@@ -120,10 +129,46 @@ describe('Matrix3', () => {
 	it('can multiply a vector (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const vec = new Vector3([1,2,3]);
+
 		mat.mulVec(vec, vec);
 
 		expect(vec.get(0)).to.be.equal(14);
 		expect(vec.get(1)).to.be.equal(32);
 		expect(vec.get(2)).to.be.equal(50);
+	});
+
+	it('can multiply mat3 (new)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+		const mat2 = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		const res = mat.mulMat(mat2);
+
+		expect(res.get(0,0)).to.be.equal(30);
+		expect(res.get(0,1)).to.be.equal(36);
+		expect(res.get(0,2)).to.be.equal(42);
+		expect(res.get(1,0)).to.be.equal(66);
+		expect(res.get(1,1)).to.be.equal(81);
+		expect(res.get(1,2)).to.be.equal(96);
+		expect(res.get(2,0)).to.be.equal(102);
+		expect(res.get(2,1)).to.be.equal(126);
+		expect(res.get(2,2)).to.be.equal(150);
+	});
+
+	it('can multiply mat3 (reference)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+		const mat2 = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+		const res = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		mat.mulMat(mat2, res);
+
+		expect(res.get(0,0)).to.be.equal(30);
+		expect(res.get(0,1)).to.be.equal(36);
+		expect(res.get(0,2)).to.be.equal(42);
+		expect(res.get(1,0)).to.be.equal(66);
+		expect(res.get(1,1)).to.be.equal(81);
+		expect(res.get(1,2)).to.be.equal(96);
+		expect(res.get(2,0)).to.be.equal(102);
+		expect(res.get(2,1)).to.be.equal(126);
+		expect(res.get(2,2)).to.be.equal(150);
 	});
 });
