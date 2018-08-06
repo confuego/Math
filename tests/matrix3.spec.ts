@@ -9,7 +9,7 @@ describe('Matrix3', () => {
 		expect(mat).to.not.be.null;
 	});
 
-	it('can get cells', () => {
+	it('should get cells', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		expect(mat.get(0,0)).to.be.equal(1);
@@ -23,7 +23,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can set cells', () => {
+	it('should set cells', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		mat.set(2,2, 1000);
@@ -31,7 +31,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(1000);
 	});
 
-	it('can add (reference)', () => {
+	it('should add (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		mat.add(mat, mat);
@@ -47,7 +47,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(18);
 	});
 
-	it('can add (new)', () => {
+	it('should add (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		const newMat = mat.add(mat);
@@ -73,7 +73,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can subtract (reference)', () => {
+	it('should subtract (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		mat.sub(mat, mat);
@@ -89,7 +89,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(0);
 	});
 
-	it('can subtract (new)', () => {
+	it('should subtract (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		const newMat = mat.sub(mat);
@@ -115,7 +115,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can multiply a vector (new)', () => {
+	it('should multiply a vector (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const vec = new Vector3([1,2,3]);
 
@@ -126,7 +126,7 @@ describe('Matrix3', () => {
 		expect(res.get(2)).to.be.equal(50);
 	});
 
-	it('can multiply a vector (reference)', () => {
+	it('should multiply a vector (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const vec = new Vector3([1,2,3]);
 
@@ -137,7 +137,7 @@ describe('Matrix3', () => {
 		expect(vec.get(2)).to.be.equal(50);
 	});
 
-	it('can multiply mat3 (new)', () => {
+	it('should multiply mat3 (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const mat2 = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
@@ -154,7 +154,7 @@ describe('Matrix3', () => {
 		expect(res.get(2,2)).to.be.equal(150);
 	});
 
-	it('can multiply mat3 (reference)', () => {
+	it('should multiply mat3 (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const mat2 = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const res = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
@@ -172,7 +172,7 @@ describe('Matrix3', () => {
 		expect(res.get(2,2)).to.be.equal(150);
 	});
 
-	it('can calculate determinant', () => {
+	it('should calculate determinant', () => {
 		const mat = new Matrix3([19,2,3], [4,5,6], [7,8,9]);
 
 		const det = mat.det();
@@ -180,7 +180,7 @@ describe('Matrix3', () => {
 		expect(det).to.be.equal(-54);
 	});
 
-	it('can transpose (reference)', () => {
+	it('should transpose (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		mat.transpose(mat);
@@ -196,7 +196,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can transpose (new)', () => {
+	it('should transpose (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		const tran = mat.transpose();
@@ -222,7 +222,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can find the adjugate (new)', () => {
+	it('should find the adjugate (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		const adj = mat.adj();
@@ -248,7 +248,7 @@ describe('Matrix3', () => {
 		expect(adj.get(2,2)).to.be.equal(-3);
 	});
 
-	it('can find the adjugate (reference)', () => {
+	it('should find the adjugate (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const adj = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
@@ -265,7 +265,7 @@ describe('Matrix3', () => {
 		expect(adj.get(2,2)).to.be.equal(-3);
 	});
 
-	it('can find the inverse (new)', () => {
+	it('should find the inverse (new)', () => {
 		const mat = new Matrix3([12,2,3], [4,5,6], [7,8,9]);
 
 		const inv = mat.inv();
@@ -291,7 +291,7 @@ describe('Matrix3', () => {
 		expect(inv.get(2,2)).to.be.closeTo(-52/33, 0.001);
 	});
 
-	it('can find the inverse (reference)', () => {
+	it('should find the inverse (reference)', () => {
 		const mat = new Matrix3([12,2,3], [4,5,6], [7,8,9]);
 		const inv = new Matrix3([12,2,3], [4,5,6], [7,8,9]);
 
@@ -318,7 +318,7 @@ describe('Matrix3', () => {
 		expect(inv.get(2,2)).to.be.closeTo(-52/33, 0.001);
 	});
 
-	it('cannot find the inverse', () => {
+	it('should not find the inverse', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		expect(mat.inv.bind(mat)).to.throw('Determinant is 0.');
