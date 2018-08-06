@@ -1,4 +1,4 @@
-import { Matrix3 } from '../src';
+import { Matrix3, Vector3 } from '../src';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -27,7 +27,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(1000);
 	});
 
-	it('can add to itself', () => {
+	it('can add (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		mat.add(mat, mat);
 
@@ -42,7 +42,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(18);
 	});
 
-	it('can add and make copy', () => {
+	it('can add (copy)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const newMat = mat.add(mat);
 
@@ -67,7 +67,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('can subtract itself', () => {
+	it('can subtract (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		mat.sub(mat, mat);
 
@@ -82,7 +82,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(0);
 	});
 
-	it('can subtract and make copy', () => {
+	it('can subtract (copy)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const newMat = mat.sub(mat);
 
@@ -105,5 +105,25 @@ describe('Matrix3', () => {
 		expect(mat.get(2,0)).to.be.equal(7);
 		expect(mat.get(2,1)).to.be.equal(8);
 		expect(mat.get(2,2)).to.be.equal(9);
+	});
+
+	it('can multiply a vector (copy)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+		const vec = new Vector3([1,2,3]);
+		const res = mat.mulVec(vec);
+
+		expect(res.get(0)).to.be.equal(14);
+		expect(res.get(1)).to.be.equal(32);
+		expect(res.get(2)).to.be.equal(50);
+	});
+
+	it('can multiply a vector (reference)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+		const vec = new Vector3([1,2,3]);
+		mat.mulVec(vec, vec);
+
+		expect(vec.get(0)).to.be.equal(14);
+		expect(vec.get(1)).to.be.equal(32);
+		expect(vec.get(2)).to.be.equal(50);
 	});
 });

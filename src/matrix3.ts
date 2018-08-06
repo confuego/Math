@@ -64,9 +64,9 @@ export class Matrix3 extends Matrix {
 		const vecData_2 = vecData[2];
 		const destData = dest._data;
 
-		destData[0] = vecData_0 * matData[0] + vecData_0 * matData[1] + vecData_0 * matData[2];
-		destData[1] = vecData_1 * matData[3] + vecData_1 * matData[4] + vecData_1 * matData[5];
-		destData[2] = vecData_2 * matData[6] + vecData_2 * matData[7] + vecData_2 * matData[8];
+		destData[0] = vecData_0 * matData[0] + vecData_1 * matData[1] + vecData_2 * matData[2];
+		destData[1] = vecData_0 * matData[3] + vecData_1 * matData[4] + vecData_2 * matData[5];
+		destData[2] = vecData_0 * matData[6] + vecData_1 * matData[7] + vecData_2 * matData[8];
 		return dest;
 	}
 
