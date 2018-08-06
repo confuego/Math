@@ -5,8 +5,10 @@
   "main": "index.ts",
   "scripts": {
     "start": "webpack",
-    "watch": "webpack --watch",
-    "serve": "webpack-dev-server"
+    "build:watch": "webpack --watch",
+		"serve": "webpack-dev-server",
+		"test": "mocha -r ts-node/register tests/**/*.spec.ts",
+		"test:watch": "mocha --watch-extensions ts --watch -r ts-node/register tests/**/*.spec.ts"
   },
   "repository": {
     "type": "git",

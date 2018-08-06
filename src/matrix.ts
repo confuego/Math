@@ -12,11 +12,11 @@ export abstract class Matrix {
 	protected abstract buildArray(rows: Array<Array<number>>): void;
 
 	public get(row: number, col: number): number {
-		return this._data[row * col + col]
+		return this._data[row * this.size + col];
 	}
 
 	public set(row: number, col: number, val: number): void {
-		this._data[row * col + col] = val;
+		this._data[row * this.size + col] = val;
 	}
 
 	public toString(): string {
@@ -27,7 +27,7 @@ export abstract class Matrix {
 
 		for(let i = 0; i < len; i++) {
 			display += (i % size === 0) ? '\n' : ',';
-			display += data[i].toString()
+			display += data[i].toString();
 		}
 
 		return display;
