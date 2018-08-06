@@ -129,6 +129,9 @@ export class Matrix3 extends Matrix {
 		const destData = dest._data;
 
 		destData[0] = data[0];
+		destData[4] = data[4];
+		destData[8] = data[8];
+
 		destData[1] = data[1];
 
 		let temp = data[1];

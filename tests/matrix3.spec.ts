@@ -171,4 +171,156 @@ describe('Matrix3', () => {
 		expect(res.get(2,1)).to.be.equal(126);
 		expect(res.get(2,2)).to.be.equal(150);
 	});
+
+	it('can calculate determinant', () => {
+		const mat = new Matrix3([19,2,3], [4,5,6], [7,8,9]);
+
+		const det = mat.det();
+
+		expect(det).to.be.equal(-54);
+	});
+
+	it('can transpose (reference)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		mat.transpose(mat);
+
+		expect(mat.get(0,0)).to.be.equal(1);
+		expect(mat.get(0,1)).to.be.equal(4);
+		expect(mat.get(0,2)).to.be.equal(7);
+		expect(mat.get(1,0)).to.be.equal(2);
+		expect(mat.get(1,1)).to.be.equal(5);
+		expect(mat.get(1,2)).to.be.equal(8);
+		expect(mat.get(2,0)).to.be.equal(3);
+		expect(mat.get(2,1)).to.be.equal(6);
+		expect(mat.get(2,2)).to.be.equal(9);
+	});
+
+	it('can transpose (new)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		const tran = mat.transpose();
+
+		expect(tran.get(0,0)).to.be.equal(1);
+		expect(tran.get(0,1)).to.be.equal(4);
+		expect(tran.get(0,2)).to.be.equal(7);
+		expect(tran.get(1,0)).to.be.equal(2);
+		expect(tran.get(1,1)).to.be.equal(5);
+		expect(tran.get(1,2)).to.be.equal(8);
+		expect(tran.get(2,0)).to.be.equal(3);
+		expect(tran.get(2,1)).to.be.equal(6);
+		expect(tran.get(2,2)).to.be.equal(9);
+
+		expect(mat.get(0,0)).to.be.equal(1);
+		expect(mat.get(0,1)).to.be.equal(2);
+		expect(mat.get(0,2)).to.be.equal(3);
+		expect(mat.get(1,0)).to.be.equal(4);
+		expect(mat.get(1,1)).to.be.equal(5);
+		expect(mat.get(1,2)).to.be.equal(6);
+		expect(mat.get(2,0)).to.be.equal(7);
+		expect(mat.get(2,1)).to.be.equal(8);
+		expect(mat.get(2,2)).to.be.equal(9);
+	});
+
+	it('can find the adjugate (new)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		const adj = mat.adj();
+
+		expect(mat.get(0,0)).to.be.equal(1);
+		expect(mat.get(0,1)).to.be.equal(2);
+		expect(mat.get(0,2)).to.be.equal(3);
+		expect(mat.get(1,0)).to.be.equal(4);
+		expect(mat.get(1,1)).to.be.equal(5);
+		expect(mat.get(1,2)).to.be.equal(6);
+		expect(mat.get(2,0)).to.be.equal(7);
+		expect(mat.get(2,1)).to.be.equal(8);
+		expect(mat.get(2,2)).to.be.equal(9);
+
+		expect(adj.get(0,0)).to.be.equal(-3);
+		expect(adj.get(0,1)).to.be.equal(6);
+		expect(adj.get(0,2)).to.be.equal(-3);
+		expect(adj.get(1,0)).to.be.equal(6);
+		expect(adj.get(1,1)).to.be.equal(-12);
+		expect(adj.get(1,2)).to.be.equal(6);
+		expect(adj.get(2,0)).to.be.equal(-3);
+		expect(adj.get(2,1)).to.be.equal(6);
+		expect(adj.get(2,2)).to.be.equal(-3);
+	});
+
+	it('can find the adjugate (reference)', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+		const adj = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		mat.adj(adj);
+
+		expect(adj.get(0,0)).to.be.equal(-3);
+		expect(adj.get(0,1)).to.be.equal(6);
+		expect(adj.get(0,2)).to.be.equal(-3);
+		expect(adj.get(1,0)).to.be.equal(6);
+		expect(adj.get(1,1)).to.be.equal(-12);
+		expect(adj.get(1,2)).to.be.equal(6);
+		expect(adj.get(2,0)).to.be.equal(-3);
+		expect(adj.get(2,1)).to.be.equal(6);
+		expect(adj.get(2,2)).to.be.equal(-3);
+	});
+
+	it('can find the inverse (new)', () => {
+		const mat = new Matrix3([12,2,3], [4,5,6], [7,8,9]);
+
+		const inv = mat.inv();
+
+		expect(mat.get(0,0)).to.be.equal(12);
+		expect(mat.get(0,1)).to.be.equal(2);
+		expect(mat.get(0,2)).to.be.equal(3);
+		expect(mat.get(1,0)).to.be.equal(4);
+		expect(mat.get(1,1)).to.be.equal(5);
+		expect(mat.get(1,2)).to.be.equal(6);
+		expect(mat.get(2,0)).to.be.equal(7);
+		expect(mat.get(2,1)).to.be.equal(8);
+		expect(mat.get(2,2)).to.be.equal(9);
+
+		expect(inv.get(0,0)).to.be.closeTo(1/11, 0.001);
+		expect(inv.get(0,1)).to.be.closeTo(-2/11, 0.001);
+		expect(inv.get(0,2)).to.be.closeTo(1/11, 0.001);
+		expect(inv.get(1,0)).to.be.closeTo(-2/11, 0.001);
+		expect(inv.get(1,1)).to.be.closeTo(-29/11, 0.001);
+		expect(inv.get(1,2)).to.be.closeTo(20/11, 0.001);
+		expect(inv.get(2,0)).to.be.closeTo(1/11, 0.001);
+		expect(inv.get(2,1)).to.be.closeTo(82/33, 0.001);
+		expect(inv.get(2,2)).to.be.closeTo(-52/33, 0.001);
+	});
+
+	it('can find the inverse (reference)', () => {
+		const mat = new Matrix3([12,2,3], [4,5,6], [7,8,9]);
+		const inv = new Matrix3([12,2,3], [4,5,6], [7,8,9]);
+
+		mat.inv(inv);
+
+		expect(mat.get(0,0)).to.be.equal(12);
+		expect(mat.get(0,1)).to.be.equal(2);
+		expect(mat.get(0,2)).to.be.equal(3);
+		expect(mat.get(1,0)).to.be.equal(4);
+		expect(mat.get(1,1)).to.be.equal(5);
+		expect(mat.get(1,2)).to.be.equal(6);
+		expect(mat.get(2,0)).to.be.equal(7);
+		expect(mat.get(2,1)).to.be.equal(8);
+		expect(mat.get(2,2)).to.be.equal(9);
+
+		expect(inv.get(0,0)).to.be.closeTo(1/11, 0.001);
+		expect(inv.get(0,1)).to.be.closeTo(-2/11, 0.001);
+		expect(inv.get(0,2)).to.be.closeTo(1/11, 0.001);
+		expect(inv.get(1,0)).to.be.closeTo(-2/11, 0.001);
+		expect(inv.get(1,1)).to.be.closeTo(-29/11, 0.001);
+		expect(inv.get(1,2)).to.be.closeTo(20/11, 0.001);
+		expect(inv.get(2,0)).to.be.closeTo(1/11, 0.001);
+		expect(inv.get(2,1)).to.be.closeTo(82/33, 0.001);
+		expect(inv.get(2,2)).to.be.closeTo(-52/33, 0.001);
+	});
+
+	it('cannot find the inverse', () => {
+		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
+
+		expect(mat.inv.bind(mat)).to.throw('Determinant is 0.');
+	});
 });
