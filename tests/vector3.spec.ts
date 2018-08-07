@@ -77,4 +77,54 @@ describe('Vector3', () => {
 		expect(vec.get(1)).to.be.equal(0);
 		expect(vec.get(2)).to.be.equal(0);
 	});
+
+	it('should multiply (new)', () => {
+		const vec = new Vector3([1,2,3]);
+
+		const res = vec.mul(vec);
+
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(2);
+		expect(vec.get(2)).to.be.equal(3);
+
+		expect(res.get(0)).to.be.equal(1);
+		expect(res.get(1)).to.be.equal(4);
+		expect(res.get(2)).to.be.equal(9);
+	});
+
+	it('should multiply (reference)', () => {
+		const vec = new Vector3([1,2,3]);
+
+		vec.mul(vec, vec);
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(4);
+		expect(vec.get(2)).to.be.equal(9);
+	});
+
+	it('should divide (new)', () => {
+		const vec = new Vector3([1,2,3]);
+
+		const res = vec.div(vec);
+
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(2);
+		expect(vec.get(2)).to.be.equal(3);
+
+		expect(res.get(0)).to.be.equal(1);
+		expect(res.get(1)).to.be.equal(1);
+		expect(res.get(2)).to.be.equal(1);
+	});
+
+	it('should divide (reference)', () => {
+		const vec = new Vector3([1,2,3]);
+
+		vec.div(vec, vec);
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(1);
+		expect(vec.get(2)).to.be.equal(1);
+	});
 });

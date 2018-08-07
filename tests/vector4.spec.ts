@@ -83,4 +83,60 @@ describe('Vector4', () => {
 		expect(vec.get(2)).to.be.equal(0);
 		expect(vec.get(3)).to.be.equal(0);
 	});
+
+	it('should multiply (new)', () => {
+		const vec = new Vector4([1,2,3,4]);
+
+		const res = vec.mul(vec);
+
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(2);
+		expect(vec.get(2)).to.be.equal(3);
+		expect(vec.get(3)).to.be.equal(4);
+
+		expect(res.get(0)).to.be.equal(1);
+		expect(res.get(1)).to.be.equal(4);
+		expect(res.get(2)).to.be.equal(9);
+		expect(res.get(3)).to.be.equal(16);
+	});
+
+	it('should multiply (reference)', () => {
+		const vec = new Vector4([1,2,3,4]);
+
+		vec.mul(vec, vec);
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(4);
+		expect(vec.get(2)).to.be.equal(9);
+		expect(vec.get(3)).to.be.equal(16);
+	});
+
+	it('should divide (new)', () => {
+		const vec = new Vector4([1,2,3,4]);
+
+		const res = vec.div(vec);
+
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(2);
+		expect(vec.get(2)).to.be.equal(3);
+		expect(vec.get(3)).to.be.equal(4);
+
+		expect(res.get(0)).to.be.equal(1);
+		expect(res.get(1)).to.be.equal(1);
+		expect(res.get(2)).to.be.equal(1);
+		expect(res.get(3)).to.be.equal(1);
+	});
+
+	it('should divide (reference)', () => {
+		const vec = new Vector4([1,2,3,4]);
+
+		vec.div(vec, vec);
+
+		expect(vec.get(0)).to.be.equal(1);
+		expect(vec.get(1)).to.be.equal(1);
+		expect(vec.get(2)).to.be.equal(1);
+		expect(vec.get(3)).to.be.equal(1);
+	});
 });
