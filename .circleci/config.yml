@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+		working_directory: ~/src
+    docker:
+      - image: circleci/node:4.8.2
+    steps:
+      - checkout
+			- restore_cache:
+				key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: npm-install
+          command: npm install
+			- save_cache:
+				key: dependency-cache-{{ checksum "package.json" }}
+				paths:
+					- ./node_modules
+      - run:
+          name: Run Unit Tests
+          command: npm test
+      - run:
+          name: Build
+					command: npm run build
+	publish:
+		requires:
+			- build
+		branches:
+			only:
+				- master
+		working_directory: ~/src
+		steps:
+			- run:
+				name: Hello World
+				command: echo Hello, World!

@@ -2,13 +2,11 @@
   "name": "math",
   "version": "1.0.0",
   "description": "Graphics Math Library",
-  "main": "index.ts",
   "scripts": {
-    "start": "webpack",
-    "build:watch": "webpack --watch",
-		"serve": "webpack-dev-server",
-		"test": "mocha -r ts-node/register tests/**/*.spec.ts",
-		"test:watch": "mocha --watch-extensions ts --watch -r ts-node/register tests/**/*.spec.ts"
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts",
+    "test:watch": "mocha --watch-extensions ts --watch -r ts-node/register tests/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +24,8 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.5.4",
     "chai": "^4.1.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "html-webpack-plugin": "^3.2.0",
     "mocha": "^5.2.0",
     "ts-loader": "^4.4.2",
     "ts-node": "^7.0.0",
@@ -34,6 +34,7 @@
     "typescript": "^2.9.2",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
   }
 }

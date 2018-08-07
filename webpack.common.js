@@ -1,12 +1,14 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-	entry: './src/index.ts',
-	mode: "development",
-	devServer: {
-		contentBase: './'
+	entry: {
+		app: './src/index.ts'
 	},
-  module: {
+	plugins: [
+		new CleanWebpackPlugin(['dist'])
+	],
+	module: {
     rules: [
       {
         test: /\.tsx?$/,
