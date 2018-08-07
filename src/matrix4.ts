@@ -88,10 +88,10 @@ export class Matrix4 extends Matrix {
 		const vecData_3 = vecData[3];
 		const destData = dest._data;
 
-		destData[0] = vecData_0 * matData[0] + vecData_0 * matData[1] + vecData_0 * matData[2] + vecData_0 * matData[3];
-		destData[1] = vecData_1 * matData[4] + vecData_1 * matData[5] + vecData_1 * matData[6] + vecData_1 * matData[7];
-		destData[2] = vecData_2 * matData[8] + vecData_2 * matData[9] + vecData_2 * matData[10] + vecData_2 * matData[11];
-		destData[3] = vecData_3 * matData[12] + vecData_3 * matData[13] + vecData_3 * matData[14] + vecData_3 * matData[15];
+		destData[0] = vecData_0 * matData[0] + vecData_1 * matData[1] + vecData_2 * matData[2] + vecData_3 * matData[3];
+		destData[1] = vecData_0 * matData[4] + vecData_1 * matData[5] + vecData_2 * matData[6] + vecData_3 * matData[7];
+		destData[2] = vecData_0 * matData[8] + vecData_1 * matData[9] + vecData_2 * matData[10] + vecData_3 * matData[11];
+		destData[3] = vecData_0 * matData[12] + vecData_1 * matData[13] + vecData_2 * matData[14] + vecData_3 * matData[15];
 
 		return dest;
 	}

@@ -1,9 +1,9 @@
 export class Vector3 {
 
-	public _data: Float32Array = new Float32Array(9);
+	public _data: Float32Array = new Float32Array(3);
 
 	constructor(_data: Array<number> = new Array(3)) {
-		this._data = new Float32Array(_data);
+		this._data.set(_data);
 	}
 
 	public get(index: number): number {

@@ -1,5 +1,18 @@
 export class Vector4 {
-	constructor(public _data: Float32Array | Float64Array = new Float32Array(4)) {}
+
+	public _data: Float32Array = new Float32Array(4);
+
+	constructor(_data: Array<number> = new Array(3)) {
+		this._data.set(_data);
+	}
+
+	public get(index: number): number {
+		return this._data[index];
+	}
+
+	public set(index: number, value: number): void {
+		this._data[index] = value;
+	}
 
 	public add(vec: Vector4, dest: Vector4 = new Vector4()): Vector4 {
 		const vecData = vec._data;

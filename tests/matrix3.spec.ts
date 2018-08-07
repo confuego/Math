@@ -222,7 +222,7 @@ describe('Matrix3', () => {
 		expect(mat.get(2,2)).to.be.equal(9);
 	});
 
-	it('should find the adjugate (new)', () => {
+	it('should find the adjoint (new)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
 		const adj = mat.adj();
@@ -248,7 +248,7 @@ describe('Matrix3', () => {
 		expect(adj.get(2,2)).to.be.equal(-3);
 	});
 
-	it('should find the adjugate (reference)', () => {
+	it('should find the adjoint (reference)', () => {
 		const mat = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 		const adj = new Matrix3([1,2,3], [4,5,6], [7,8,9]);
 
