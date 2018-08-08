@@ -3,18 +3,18 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: 'circleci/node:7.10'
+      - image: circleci/node:4.8.2-jessie
     steps:
       - checkout
       - restore_cache:
-        key: 'dependency-cache-{{ checksum "package.json" }}'
+        key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: npm-install
           command: npm install
       - save_cache:
-        key: 'dependency-cache-{{ checksum "package.json" }}'
+        key: dependency-cache-{{ checksum "package.json" }}
         paths:
-          - ./node_modules
+          - node_modules
       - run:
           name: Run Unit Tests
           command: npm test
@@ -31,4 +31,4 @@ jobs:
     steps:
       - run:
         name: Hello World
-        command: 'echo Hello, World!'
+        command: echo Hello, World!
