@@ -12,8 +12,8 @@ Math libraries for Games in JS
 - [X] Identity Matrix4
 - [ ] Documentation Generator
 - [X] Automated Tests
-- [ ] CircleCI
-	- [ ] Runs tests on pushes to every branch
+- [X] CircleCI
+	- [X] Runs tests on pushes to every branch
 	- [ ] Publishes to npm on merge to master
 - [ ] Better Name for library
 - [ ] General Matrix Class
