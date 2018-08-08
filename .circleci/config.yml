@@ -21,14 +21,3 @@ jobs:
       - run:
           name: Build
           command: npm run build
-  publish:
-    requires:
-      - build
-    branches:
-      only:
-        - master
-    working_directory: ~/src
-    steps:
-      - run:
-        name: Hello World
-        command: echo Hello, World!
