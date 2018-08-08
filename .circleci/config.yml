@@ -6,12 +6,12 @@ jobs:
       - image: 'circleci/node:7.10'
     steps:
       - checkout
-      - restore_cache: null
+      - restore_cache:
         key: 'dependency-cache-{{ checksum "package.json" }}'
       - run:
           name: npm-install
           command: npm install
-      - save_cache: null
+      - save_cache:
         key: 'dependency-cache-{{ checksum "package.json" }}'
         paths:
           - ./node_modules
@@ -29,6 +29,6 @@ jobs:
         - master
     working_directory: ~/src
     steps:
-      - run: null
+      - run:
         name: Hello World
         command: 'echo Hello, World!'
