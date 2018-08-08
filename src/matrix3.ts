@@ -2,8 +2,9 @@ import { Vector3 } from "./vector3";
 import { Matrix } from "./matrix";
 
 export class Matrix3 extends Matrix {
-
-	public static IDENTITY = new Matrix3([1,0,0], [0,1,0], [0,0,1]);
+	public static IDENTITY(): Matrix3 {
+		return new Matrix3([1, 0, 0], [0, 1, 0], [0, 0, 1]);
+	}
 
 	constructor(..._rows: Array<Array<number>>) {
 		super(3, ..._rows);
@@ -64,9 +65,12 @@ export class Matrix3 extends Matrix {
 		const vecData_2 = vecData[2];
 		const destData = dest._data;
 
-		destData[0] = vecData_0 * matData[0] + vecData_1 * matData[1] + vecData_2 * matData[2];
-		destData[1] = vecData_0 * matData[3] + vecData_1 * matData[4] + vecData_2 * matData[5];
-		destData[2] = vecData_0 * matData[6] + vecData_1 * matData[7] + vecData_2 * matData[8];
+		destData[0] =
+			vecData_0 * matData[0] + vecData_1 * matData[1] + vecData_2 * matData[2];
+		destData[1] =
+			vecData_0 * matData[3] + vecData_1 * matData[4] + vecData_2 * matData[5];
+		destData[2] =
+			vecData_0 * matData[6] + vecData_1 * matData[7] + vecData_2 * matData[8];
 		return dest;
 	}
 
@@ -119,9 +123,11 @@ export class Matrix3 extends Matrix {
 		const data_7 = data[7];
 		const data_8 = data[8];
 
-		return (data[0] * (data_4 * data_8 - data_5 * data_7))
-						- (data[1] * (data_3 * data_8 - data_5 * data_6))
-						+ (data[2] * (data_3 * data_7 - data_4 * data_6));
+		return (
+			data[0] * (data_4 * data_8 - data_5 * data_7) -
+			data[1] * (data_3 * data_8 - data_5 * data_6) +
+			data[2] * (data_3 * data_7 - data_4 * data_6)
+		);
 	}
 
 	public transpose(dest: Matrix3 = new Matrix3()): Matrix3 {
@@ -163,23 +169,23 @@ export class Matrix3 extends Matrix {
 		const data_7 = data[7];
 		const data_8 = data[8];
 
-		destData[0] = (data_4 * data_8) - (data_5 * data_7);
-		destData[1] = -((data_1 * data_8) - (data_2 * data_7));
-		destData[2] = (data_1 * data_5) - (data_2 * data_4);
-		destData[3] = -((data_3 * data_8) - (data_5 * data_6));
-		destData[4] = (data_0 * data_8) - (data_2 * data_6);
-		destData[5] = -((data_0 * data_5) - (data_2 * data_3));
-		destData[6] = (data_3 * data_7) - (data_4 * data_6);
-		destData[7] = -((data_0 * data_7) - (data_1 * data_6));
-		destData[8] = (data_0 * data_4) -(data_1 * data_3);
+		destData[0] = data_4 * data_8 - data_5 * data_7;
+		destData[1] = -(data_1 * data_8 - data_2 * data_7);
+		destData[2] = data_1 * data_5 - data_2 * data_4;
+		destData[3] = -(data_3 * data_8 - data_5 * data_6);
+		destData[4] = data_0 * data_8 - data_2 * data_6;
+		destData[5] = -(data_0 * data_5 - data_2 * data_3);
+		destData[6] = data_3 * data_7 - data_4 * data_6;
+		destData[7] = -(data_0 * data_7 - data_1 * data_6);
+		destData[8] = data_0 * data_4 - data_1 * data_3;
 
 		return dest;
 	}
 
 	public inv(dest: Matrix3 = new Matrix3()): Matrix3 {
 		let det = this.det();
-		if(det === 0) {
-			throw new Error('Determinant is 0.');
+		if (det === 0) {
+			throw new Error("Determinant is 0.");
 		}
 
 		const adj = this.adj(dest);

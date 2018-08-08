@@ -2,8 +2,74 @@ import { Matrix } from "./matrix";
 import { Vector4 } from "./vector4";
 
 export class Matrix4 extends Matrix {
+	public static IDENTITY(): Matrix4 {
+		return new Matrix4([1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]);
+	}
 
-	static IDENTITY: Matrix4 = new Matrix4([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]);
+	public static ortho(
+		left: number,
+		right: number,
+		bottom: number,
+		top: number,
+		near: number,
+		far: number,
+		dest: Matrix4 = new Matrix4()
+	): Matrix4 {
+		const destData = dest._data;
+
+		destData[0] = 2 / (right - left);
+		destData[1] = 0;
+		destData[2] = 0;
+		destData[3] = -((right + left) / (right - left));
+		destData[4] = 0;
+		destData[5] = 2 / (top - bottom);
+		destData[6] = 0;
+		destData[7] = -((top + bottom) / (top - bottom));
+		destData[8] = 0;
+		destData[9] = 0;
+		destData[10] = -2 / (far - near);
+		destData[11] = -((far + near) / (far - near));
+		destData[12] = 0;
+		destData[13] = 0;
+		destData[14] = 0;
+		destData[15] = 1;
+
+		return dest;
+	}
+
+	public static pers(
+		fieldOfView: number,
+		near: number,
+		far: number,
+		aspectRatio: number,
+		dest: Matrix4 = new Matrix4()
+	): Matrix4 {
+		const destData = dest._data;
+
+		const top = near * Math.tan((fieldOfView * (Math.PI / 180)) / 2);
+		const bottom = -top;
+		const right = top * aspectRatio;
+		const left = -right;
+
+		destData[0] = (2 * near) / (right - left);
+		destData[1] = 0;
+		destData[2] = 0;
+		destData[3] = -near * ((right + left) / (right - left));
+		destData[4] = 0;
+		destData[5] = (2 * near) / (top - bottom);
+		destData[6] = 0;
+		destData[7] = -near * ((top + bottom) / (top - bottom));
+		destData[8] = 0;
+		destData[9] = 0;
+		destData[10] = -(far + near) / (far - near);
+		destData[11] = (2 * far * near) / (near - far);
+		destData[12] = 0;
+		destData[13] = 0;
+		destData[14] = -1;
+		destData[15] = 0;
+
+		return dest;
+	}
 
 	constructor(..._rows: Array<Array<number>>) {
 		super(4, ..._rows);
@@ -88,10 +154,26 @@ export class Matrix4 extends Matrix {
 		const vecData_3 = vecData[3];
 		const destData = dest._data;
 
-		destData[0] = vecData_0 * matData[0] + vecData_1 * matData[1] + vecData_2 * matData[2] + vecData_3 * matData[3];
-		destData[1] = vecData_0 * matData[4] + vecData_1 * matData[5] + vecData_2 * matData[6] + vecData_3 * matData[7];
-		destData[2] = vecData_0 * matData[8] + vecData_1 * matData[9] + vecData_2 * matData[10] + vecData_3 * matData[11];
-		destData[3] = vecData_0 * matData[12] + vecData_1 * matData[13] + vecData_2 * matData[14] + vecData_3 * matData[15];
+		destData[0] =
+			vecData_0 * matData[0] +
+			vecData_1 * matData[1] +
+			vecData_2 * matData[2] +
+			vecData_3 * matData[3];
+		destData[1] =
+			vecData_0 * matData[4] +
+			vecData_1 * matData[5] +
+			vecData_2 * matData[6] +
+			vecData_3 * matData[7];
+		destData[2] =
+			vecData_0 * matData[8] +
+			vecData_1 * matData[9] +
+			vecData_2 * matData[10] +
+			vecData_3 * matData[11];
+		destData[3] =
+			vecData_0 * matData[12] +
+			vecData_1 * matData[13] +
+			vecData_2 * matData[14] +
+			vecData_3 * matData[15];
 
 		return dest;
 	}
@@ -135,25 +217,89 @@ export class Matrix4 extends Matrix {
 
 		const destData = dest._data;
 
-		destData[0] = data_0 * matData_0 + data_1 * matData_4 + data_2 * matData_8 + data_3 * matData_12;
-		destData[4] = data_4 * matData_0 + data_5 * matData_4 + data_6 * matData_8 + data_7 * matData_12;
-		destData[8] = data_8 * matData_0 + data_9 * matData_4 + data_10 * matData_8 + data_11 * matData_12;
-		destData[12] = data_12 * matData_0 + data_13 * matData_4 + data_14 * matData_8 + data_15 * matData_12;
+		destData[0] =
+			data_0 * matData_0 +
+			data_1 * matData_4 +
+			data_2 * matData_8 +
+			data_3 * matData_12;
+		destData[4] =
+			data_4 * matData_0 +
+			data_5 * matData_4 +
+			data_6 * matData_8 +
+			data_7 * matData_12;
+		destData[8] =
+			data_8 * matData_0 +
+			data_9 * matData_4 +
+			data_10 * matData_8 +
+			data_11 * matData_12;
+		destData[12] =
+			data_12 * matData_0 +
+			data_13 * matData_4 +
+			data_14 * matData_8 +
+			data_15 * matData_12;
 
-		destData[1] = data_0 * matData_1 + data_1 * matData_5 + data_2 * matData_9 + data_3 * matData_13;
-		destData[5] = data_4 * matData_1 + data_5 * matData_5 + data_6 * matData_9 + data_7 * matData_13;
-		destData[9] = data_8 * matData_1 + data_9 * matData_5 + data_10 * matData_9 + data_11 * matData_13;
-		destData[13] = data_12 * matData_1 + data_13 * matData_5 + data_14 * matData_9 + data_15 * matData_13;
+		destData[1] =
+			data_0 * matData_1 +
+			data_1 * matData_5 +
+			data_2 * matData_9 +
+			data_3 * matData_13;
+		destData[5] =
+			data_4 * matData_1 +
+			data_5 * matData_5 +
+			data_6 * matData_9 +
+			data_7 * matData_13;
+		destData[9] =
+			data_8 * matData_1 +
+			data_9 * matData_5 +
+			data_10 * matData_9 +
+			data_11 * matData_13;
+		destData[13] =
+			data_12 * matData_1 +
+			data_13 * matData_5 +
+			data_14 * matData_9 +
+			data_15 * matData_13;
 
-		destData[2] = data_0 * matData_2 + data_1 * matData_6 + data_2 * matData_10 + data_3 * matData_14;
-		destData[6] = data_4 * matData_2 + data_5 * matData_6 + data_6 * matData_10 + data_7 * matData_14;
-		destData[10] = data_8 * matData_2 + data_9 * matData_6 + data_10 * matData_10 + data_11 * matData_14;
-		destData[14] = data_12 * matData_2 + data_13 * matData_6 + data_14 * matData_10 + data_15 * matData_14;
+		destData[2] =
+			data_0 * matData_2 +
+			data_1 * matData_6 +
+			data_2 * matData_10 +
+			data_3 * matData_14;
+		destData[6] =
+			data_4 * matData_2 +
+			data_5 * matData_6 +
+			data_6 * matData_10 +
+			data_7 * matData_14;
+		destData[10] =
+			data_8 * matData_2 +
+			data_9 * matData_6 +
+			data_10 * matData_10 +
+			data_11 * matData_14;
+		destData[14] =
+			data_12 * matData_2 +
+			data_13 * matData_6 +
+			data_14 * matData_10 +
+			data_15 * matData_14;
 
-		destData[3] = data_0 * matData_3 + data_1 * matData_7 + data_2 * matData_11 + data_3 * matData_15;
-		destData[7] = data_4 * matData_3 + data_5 * matData_7 + data_6 * matData_11 + data_7 * matData_15;
-		destData[11] = data_8 * matData_3 + data_9 * matData_7 + data_10 * matData_11 + data_11 * matData_15;
-		destData[15] = data_12 * matData_3 + data_13 * matData_7 + data_14 * matData_11 + data_15 * matData_15;
+		destData[3] =
+			data_0 * matData_3 +
+			data_1 * matData_7 +
+			data_2 * matData_11 +
+			data_3 * matData_15;
+		destData[7] =
+			data_4 * matData_3 +
+			data_5 * matData_7 +
+			data_6 * matData_11 +
+			data_7 * matData_15;
+		destData[11] =
+			data_8 * matData_3 +
+			data_9 * matData_7 +
+			data_10 * matData_11 +
+			data_11 * matData_15;
+		destData[15] =
+			data_12 * matData_3 +
+			data_13 * matData_7 +
+			data_14 * matData_11 +
+			data_15 * matData_15;
 
 		return dest;
 	}
@@ -173,22 +319,28 @@ export class Matrix4 extends Matrix {
 		const data_14 = data[14];
 		const data_15 = data[15];
 
-		const coFactor_1 = (data_5 * (data_10 * data_15 - data_11 * data_14))
-												- (data_6 * (data_9 * data_15 - data_11 * data_13))
-												+ (data_7 * (data_9 * data_14 - data_10 * data_13));
-		const coFactor_2 = (data_4 * (data_10 * data_15 - data_11 * data_14))
-												- (data_6 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_7 * (data_8 * data_14 - data_10 * data_12));
-		const coFactor_3 = (data_4 * (data_9 * data_15 - data_11 * data_13))
-												- (data_5 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_7 * (data_8 * data_13 - data_9 * data_12));
-		const coFactor_4 = (data_4 * (data_9 * data_14 - data_13 * data_10))
-												- (data_5 * (data_8 * data_14 - data_10 * data_12))
-												+ (data_6 * (data_8 * data_13 - data_9 * data_12));
-		return (data[0] * coFactor_1)
-				- (data[1] * coFactor_2)
-				+ (data[2] * coFactor_3)
-				- (data[3] * coFactor_4);
+		const coFactor_1 =
+			data_5 * (data_10 * data_15 - data_11 * data_14) -
+			data_6 * (data_9 * data_15 - data_11 * data_13) +
+			data_7 * (data_9 * data_14 - data_10 * data_13);
+		const coFactor_2 =
+			data_4 * (data_10 * data_15 - data_11 * data_14) -
+			data_6 * (data_8 * data_15 - data_11 * data_12) +
+			data_7 * (data_8 * data_14 - data_10 * data_12);
+		const coFactor_3 =
+			data_4 * (data_9 * data_15 - data_11 * data_13) -
+			data_5 * (data_8 * data_15 - data_11 * data_12) +
+			data_7 * (data_8 * data_13 - data_9 * data_12);
+		const coFactor_4 =
+			data_4 * (data_9 * data_14 - data_13 * data_10) -
+			data_5 * (data_8 * data_14 - data_10 * data_12) +
+			data_6 * (data_8 * data_13 - data_9 * data_12);
+		return (
+			data[0] * coFactor_1 -
+			data[1] * coFactor_2 +
+			data[2] * coFactor_3 -
+			data[3] * coFactor_4
+		);
 	}
 
 	public adj(dest: Matrix4 = new Matrix4()): Matrix4 {
@@ -211,77 +363,101 @@ export class Matrix4 extends Matrix {
 		const data_14 = data[14];
 		const data_15 = data[15];
 
-		destData[0] = (data_5 * (data_10 * data_15 - data_11 * data_14))
-												- (data_6 * (data_9 * data_15 - data_11 * data_13))
-												+ (data_7 * (data_9 * data_14 - data_10 * data_13));
+		destData[0] =
+			data_5 * (data_10 * data_15 - data_11 * data_14) -
+			data_6 * (data_9 * data_15 - data_11 * data_13) +
+			data_7 * (data_9 * data_14 - data_10 * data_13);
 
-		destData[4] = -((data_4 * (data_10 * data_15 - data_11 * data_14))
-												- (data_6 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_7 * (data_8 * data_14 - data_10 * data_12)));
+		destData[4] = -(
+			data_4 * (data_10 * data_15 - data_11 * data_14) -
+			data_6 * (data_8 * data_15 - data_11 * data_12) +
+			data_7 * (data_8 * data_14 - data_10 * data_12)
+		);
 
-		destData[8] = (data_4 * (data_9 * data_15 - data_11 * data_13))
-												- (data_5 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_7 * (data_8 * data_13 - data_9 * data_12));
+		destData[8] =
+			data_4 * (data_9 * data_15 - data_11 * data_13) -
+			data_5 * (data_8 * data_15 - data_11 * data_12) +
+			data_7 * (data_8 * data_13 - data_9 * data_12);
 
-		destData[12] = -((data_4 * (data_9 * data_14 - data_13 * data_10))
-												- (data_5 * (data_8 * data_14 - data_10 * data_12))
-												+ (data_6 * (data_8 * data_13 - data_9 * data_12)));
+		destData[12] = -(
+			data_4 * (data_9 * data_14 - data_13 * data_10) -
+			data_5 * (data_8 * data_14 - data_10 * data_12) +
+			data_6 * (data_8 * data_13 - data_9 * data_12)
+		);
 
-		destData[1] = -((data_1 * (data_10 * data_15 - data_11 * data_14))
-												- (data_2 * (data_9 * data_15 - data_11 * data_13))
-												+ (data_3 * (data_9 * data_14 - data_10 * data_13)));
+		destData[1] = -(
+			data_1 * (data_10 * data_15 - data_11 * data_14) -
+			data_2 * (data_9 * data_15 - data_11 * data_13) +
+			data_3 * (data_9 * data_14 - data_10 * data_13)
+		);
 
-		destData[5] = (data_0 * (data_10 * data_15 - data_11 * data_14))
-												- (data_2 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_3 * (data_8 * data_14 - data_10 * data_12));
+		destData[5] =
+			data_0 * (data_10 * data_15 - data_11 * data_14) -
+			data_2 * (data_8 * data_15 - data_11 * data_12) +
+			data_3 * (data_8 * data_14 - data_10 * data_12);
 
-		destData[9] = -((data_0 * (data_9 * data_15 - data_11 * data_13))
-												- (data_1 * (data_8 * data_15 - data_11 * data_12))
-												+ (data_3 * (data_8 * data_13 - data_9 * data_12)));
+		destData[9] = -(
+			data_0 * (data_9 * data_15 - data_11 * data_13) -
+			data_1 * (data_8 * data_15 - data_11 * data_12) +
+			data_3 * (data_8 * data_13 - data_9 * data_12)
+		);
 
-		destData[13] = (data_0 * (data_9 * data_14 - data_10 * data_13))
-												- (data_1 * (data_8 * data_14 - data_10 * data_12))
-												+ (data_2 * (data_8 * data_13 - data_9 * data_12));
+		destData[13] =
+			data_0 * (data_9 * data_14 - data_10 * data_13) -
+			data_1 * (data_8 * data_14 - data_10 * data_12) +
+			data_2 * (data_8 * data_13 - data_9 * data_12);
 
-		destData[2] = (data_1 * (data_6 * data_15 - data_7 * data_14))
-													- (data_2 * (data_5 * data_15 - data_7 * data_13))
-													+ (data_3 * (data_5 * data_14 - data_6 * data_13));
+		destData[2] =
+			data_1 * (data_6 * data_15 - data_7 * data_14) -
+			data_2 * (data_5 * data_15 - data_7 * data_13) +
+			data_3 * (data_5 * data_14 - data_6 * data_13);
 
-		destData[6] = -((data_0 * (data_6 * data_15 - data_7 * data_14))
-													- (data_2 * (data_4 * data_15 - data_7 * data_12))
-													+ (data_3 * (data_4 * data_14 - data_6 * data_12)));
+		destData[6] = -(
+			data_0 * (data_6 * data_15 - data_7 * data_14) -
+			data_2 * (data_4 * data_15 - data_7 * data_12) +
+			data_3 * (data_4 * data_14 - data_6 * data_12)
+		);
 
-		destData[10] = (data_0 * (data_5 * data_15 - data_7 * data_13))
-														- (data_1 * (data_4 * data_15 - data_7 * data_12))
-														+ (data_3 * (data_4 * data_13 - data_5 * data_12));
+		destData[10] =
+			data_0 * (data_5 * data_15 - data_7 * data_13) -
+			data_1 * (data_4 * data_15 - data_7 * data_12) +
+			data_3 * (data_4 * data_13 - data_5 * data_12);
 
-		destData[14] = -((data_0 * (data_5 * data_14 - data_6 * data_13))
-														- (data_1 * (data_4 * data_14 - data_6 * data_12))
-														+ (data_2 * (data_4 * data_13 - data_5 * data_12)));
+		destData[14] = -(
+			data_0 * (data_5 * data_14 - data_6 * data_13) -
+			data_1 * (data_4 * data_14 - data_6 * data_12) +
+			data_2 * (data_4 * data_13 - data_5 * data_12)
+		);
 
-		destData[3] = -((data_1 * (data_6 * data_11 - data_7 * data_10))
-														- (data_2 * (data_5 * data_11 - data_7 * data_9))
-														+ (data_3 * (data_5 * data_10 - data_6 * data_9)));
+		destData[3] = -(
+			data_1 * (data_6 * data_11 - data_7 * data_10) -
+			data_2 * (data_5 * data_11 - data_7 * data_9) +
+			data_3 * (data_5 * data_10 - data_6 * data_9)
+		);
 
-		destData[7] = (data_0 * (data_6 * data_11 - data_7 * data_10))
-														- (data_2 * (data_4 * data_11 - data_7 * data_8))
-														+ (data_3 * (data_4 * data_10 - data_6 * data_8));
+		destData[7] =
+			data_0 * (data_6 * data_11 - data_7 * data_10) -
+			data_2 * (data_4 * data_11 - data_7 * data_8) +
+			data_3 * (data_4 * data_10 - data_6 * data_8);
 
-		destData[11] = -((data_0 * (data_5 * data_11 - data_7 * data_9))
-														- (data_1 * (data_4 * data_11 - data_7 * data_8))
-														+ (data_3 * (data_4 * data_9 - data_5 * data_8)));
+		destData[11] = -(
+			data_0 * (data_5 * data_11 - data_7 * data_9) -
+			data_1 * (data_4 * data_11 - data_7 * data_8) +
+			data_3 * (data_4 * data_9 - data_5 * data_8)
+		);
 
-		destData[15] = (data_0 * (data_5 * data_10 - data_6 * data_9))
-														- (data_1 * (data_4 * data_10 - data_6 * data_8))
-														+ (data_2 * (data_4 * data_9 - data_5 * data_8));
+		destData[15] =
+			data_0 * (data_5 * data_10 - data_6 * data_9) -
+			data_1 * (data_4 * data_10 - data_6 * data_8) +
+			data_2 * (data_4 * data_9 - data_5 * data_8);
 
 		return dest;
 	}
 
 	public inv(dest: Matrix4 = new Matrix4()): Matrix4 {
 		const det = this.det();
-		if(det === 0) {
-			throw new Error('Determinant is 0.');
+		if (det === 0) {
+			throw new Error("Determinant is 0.");
 		}
 
 		const adj = this.adj(dest);
