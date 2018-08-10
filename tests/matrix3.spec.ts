@@ -337,4 +337,25 @@ describe("Matrix3", () => {
 		expect(mat.get(2, 1)).to.be.equal(0);
 		expect(mat.get(2, 2)).to.be.equal(1);
 	});
+
+	it("should create a rotation (axis / angle)", () => {
+		const vec = new Vector3([0, 0, 1]);
+		const rot = Matrix3.rotateAxis(vec, Math.PI / 2);
+
+		const res = rot.mulVec(new Vector3([0, 2, 0]));
+
+		expect(res.get(0)).to.be.equal(-2);
+		expect(Math.round(res.get(1))).to.be.equal(0);
+		expect(res.get(2)).to.be.equal(0);
+	});
+
+	it("should create a rotation (Euler Angles)", () => {
+		const rot = Matrix3.rotate(Math.PI / 2, Math.PI / 2, Math.PI / 2);
+
+		const res = rot.mulVec(new Vector3([0, 0, 1]));
+
+		expect(Math.round(res.get(0))).to.be.equal(0);
+		expect(res.get(1)).to.be.equal(1);
+		expect(Math.round(res.get(2))).to.be.equal(0);
+	});
 });

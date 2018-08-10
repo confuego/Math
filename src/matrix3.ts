@@ -203,4 +203,61 @@ export class Matrix3 extends Matrix {
 
 		return dest;
 	}
+
+	public static rotateAxis(
+		axis: Vector3,
+		angle: number,
+		dest: Matrix3 = new Matrix3()
+	): Matrix3 {
+		const data = dest._data;
+		const axisData = axis._data;
+		const axisData_0 = axisData[0];
+		const axisData_1 = axisData[1];
+		const axisData_2 = axisData[2];
+
+		const cos = Math.cos(angle);
+		const minusCos = 1 - cos;
+		const sin = Math.sin(angle);
+
+		data[0] = cos + Math.pow(axisData_0, 2) * minusCos;
+		data[1] = axisData_0 * axisData_1 * minusCos - axisData_2 * sin;
+		data[2] = axisData_0 * axisData_2 * minusCos + axisData_1 * sin;
+		data[3] = axisData_1 * axisData_0 * minusCos + axisData_2 * sin;
+		data[4] = cos + Math.pow(axisData_1, 2) * minusCos;
+		data[5] = axisData_1 * axisData_2 * minusCos - axisData_0 * sin;
+		data[6] = axisData_2 * axisData_0 * minusCos - axisData_1 * sin;
+		data[7] = axisData_2 * axisData_1 * minusCos - axisData_0 * sin;
+		data[8] = cos + Math.pow(axisData_2, 2) * minusCos;
+
+		return dest;
+	}
+
+	public static rotate(
+		x: number,
+		y: number,
+		z: number,
+		dest: Matrix3 = new Matrix3()
+	): Matrix3 {
+		const data = dest._data;
+
+		const cosX = Math.cos(x);
+		const cosY = Math.cos(y);
+		const cosZ = Math.cos(z);
+
+		const sinX = Math.sin(x);
+		const sinY = Math.sin(y);
+		const sinZ = Math.sin(z);
+
+		data[0] = cosZ * cosY - sinZ * sinY * sinX;
+		data[1] = -(cosX * sinZ);
+		data[2] = cosZ * sinY + cosY * sinZ * sinX;
+		data[3] = cosY * sinZ + cosZ * sinX * sinY;
+		data[4] = cosZ * cosX;
+		data[5] = sinZ * sinY - cosZ * cosY * sinX;
+		data[6] = -(cosX * sinY);
+		data[7] = sinX;
+		data[8] = cosX * cosY;
+
+		return dest;
+	}
 }
