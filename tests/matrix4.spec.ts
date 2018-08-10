@@ -559,7 +559,7 @@ describe("Matrix4", () => {
 		expect(res.get(3)).to.be.equal(1);
 	});
 
-	it("should scale a vector", () => {
+	it("should scale a vector (x, y, z)", () => {
 		const scale = Matrix4.scale(1000, 2000, 0.5);
 
 		const res = scale.mulVec(new Vector4([1, 2, 3, 1]));
@@ -567,6 +567,17 @@ describe("Matrix4", () => {
 		expect(res.get(0)).to.be.equal(1000);
 		expect(res.get(1)).to.be.equal(4000);
 		expect(res.get(2)).to.be.equal(1.5);
+		expect(res.get(3)).to.be.equal(1);
+	});
+
+	it("should scale a vector (vector)", () => {
+		const scale = Matrix4.scaleFactor(1000);
+
+		const res = scale.mulVec(new Vector4([1, 2, 3, 1]));
+
+		expect(res.get(0)).to.be.equal(1000);
+		expect(res.get(1)).to.be.equal(2000);
+		expect(res.get(2)).to.be.equal(3000);
 		expect(res.get(3)).to.be.equal(1);
 	});
 });

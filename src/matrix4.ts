@@ -570,6 +570,13 @@ export class Matrix4 extends Matrix {
 		return dest;
 	}
 
+	public static scaleFactor(
+		factor: number,
+		dest: Matrix4 = Matrix4.IDENTITY()
+	): Matrix4 {
+		return this.scale(factor, factor, factor, dest);
+	}
+
 	public static scale(
 		x: number,
 		y: number,
