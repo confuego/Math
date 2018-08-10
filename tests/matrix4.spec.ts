@@ -1,4 +1,4 @@
-import { Matrix4, Vector4 } from "../src";
+import { Matrix4, Vector4, Vector3 } from "../src";
 import { expect } from "chai";
 import "mocha";
 
@@ -523,5 +523,28 @@ describe("Matrix4", () => {
 		expect(mat.get(3, 1)).to.be.equal(0);
 		expect(mat.get(3, 2)).to.be.equal(-1);
 		expect(mat.get(3, 3)).to.be.equal(0);
+	});
+
+	it("should create a rotation (Axis / Angle)", () => {
+		const vec = new Vector3([0, 0, 1]);
+		const rot = Matrix4.rotateAxis(vec, Math.PI / 2);
+
+		const res = rot.mulVec(new Vector4([0, 2, 0, 1]));
+
+		expect(res.get(0)).to.be.equal(-2);
+		expect(Math.round(res.get(1))).to.be.equal(0);
+		expect(res.get(2)).to.be.equal(0);
+		expect(res.get(3)).to.be.equal(1);
+	});
+
+	it("should create a rotation (Euler Angles)", () => {
+		const rot = Matrix4.rotate(Math.PI / 2, Math.PI / 2, Math.PI / 2);
+
+		const res = rot.mulVec(new Vector4([0, 0, 1, 1]));
+
+		expect(Math.round(res.get(0))).to.be.equal(0);
+		expect(res.get(1)).to.be.equal(1);
+		expect(Math.round(res.get(2))).to.be.equal(0);
+		expect(res.get(3)).to.be.equal(1);
 	});
 });

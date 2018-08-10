@@ -338,7 +338,7 @@ describe("Matrix3", () => {
 		expect(mat.get(2, 2)).to.be.equal(1);
 	});
 
-	it("should create a rotation (axis / angle)", () => {
+	it("should create a rotation (Axis / Angle)", () => {
 		const vec = new Vector3([0, 0, 1]);
 		const rot = Matrix3.rotateAxis(vec, Math.PI / 2);
 
