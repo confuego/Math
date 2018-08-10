@@ -554,4 +554,34 @@ export class Matrix4 extends Matrix {
 
 		return dest;
 	}
+
+	public static translation(
+		x: number,
+		y: number,
+		z: number,
+		dest: Matrix4 = Matrix4.IDENTITY()
+	): Matrix4 {
+		const data = dest._data;
+
+		data[3] = x;
+		data[7] = y;
+		data[11] = z;
+
+		return dest;
+	}
+
+	public static scale(
+		x: number,
+		y: number,
+		z: number,
+		dest: Matrix4 = Matrix4.IDENTITY()
+	): Matrix4 {
+		const data = dest._data;
+
+		data[0] = x;
+		data[5] = y;
+		data[10] = z;
+
+		return dest;
+	}
 }

@@ -547,4 +547,26 @@ describe("Matrix4", () => {
 		expect(Math.round(res.get(2))).to.be.equal(0);
 		expect(res.get(3)).to.be.equal(1);
 	});
+
+	it("should translate a vector", () => {
+		const trans = Matrix4.translation(10, 20, 30);
+
+		const res = trans.mulVec(new Vector4([1, 2, 3, 1]));
+
+		expect(res.get(0)).to.be.equal(11);
+		expect(res.get(1)).to.be.equal(22);
+		expect(res.get(2)).to.be.equal(33);
+		expect(res.get(3)).to.be.equal(1);
+	});
+
+	it("should scale a vector", () => {
+		const scale = Matrix4.scale(1000, 2000, 0.5);
+
+		const res = scale.mulVec(new Vector4([1, 2, 3, 1]));
+
+		expect(res.get(0)).to.be.equal(1000);
+		expect(res.get(1)).to.be.equal(4000);
+		expect(res.get(2)).to.be.equal(1.5);
+		expect(res.get(3)).to.be.equal(1);
+	});
 });
